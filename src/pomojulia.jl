@@ -14,12 +14,11 @@ minutesNow = minute(now())
 
     mutable struct TimerStruct
         minutes::Int64
-        seconds::Int64
     end
 
-    SHORTBREAK = TimerStruct(5, 0)
-    LONGBREAK = TimerStruct(15, 0)
-    POMODORO = TimerStruct(25, 0)
+    SHORTBREAK = TimerStruct(5)
+    LONGBREAK = TimerStruct(15)
+    POMODORO = TimerStruct(25)
 
     defaultTimer = SHORTBREAK
 
@@ -45,8 +44,8 @@ minutesNow = minute(now())
     """)
 
     function countdown(pomodoroOption::TimerStruct)
-        seconds = pomodoroOption.seconds
         minutes = pomodoroOption.minutes
+        seconds = 0
 
         while minutes >= 0
             for i in 1:-1:1
@@ -63,4 +62,4 @@ minutesNow = minute(now())
         end
     end
 
-    countdown(defaultTimer)
+    countdown(SHORTBREAK)
