@@ -17,11 +17,11 @@ minutesNow = minute(now())
         seconds::Int64
     end
 
-    SHORTBREAK = TimerStruct(5, 60)
-    LONGBREAK = TimerStruct(15, 60)
-    POMODORO = TimerStruct(25, 60)
+    SHORTBREAK = TimerStruct(5, 0)
+    LONGBREAK = TimerStruct(15, 0)
+    POMODORO = TimerStruct(25, 0)
 
-    defaultTimer = LONGBREAK
+    defaultTimer = SHORTBREAK
 
     function getTimerName()
         timeNameMap = Dict(SHORTBREAK => "Short Break", LONGBREAK => "Long Break")
@@ -47,19 +47,20 @@ minutesNow = minute(now())
     function countdown(pomodoroOption::TimerStruct)
         seconds = pomodoroOption.seconds
         minutes = pomodoroOption.minutes
-        
-        while minutes > 0
-            for i in seconds:-1:0
-                print("\r",minutes, ":", seconds)
-                sleep(1)
-                seconds = seconds - 1
 
-                if seconds == 0 && minutes > 0
-                    seconds = 5
+        while minutes >= 0
+            for i in 1:-1:1
+                print("\r", minutes, ":", seconds)
+                sleep(1)
+    
+                if seconds == 0
                     minutes -= 1
+                    seconds = 60
                 end
+
+                seconds -= 1
             end
         end
     end
 
-    #countdown(defaultTimer)
+    countdown(defaultTimer)
