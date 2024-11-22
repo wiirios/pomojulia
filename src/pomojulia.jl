@@ -32,17 +32,6 @@ minutesNow = minute(now())
         return get(timerMap, defaultTimer, 25)
     end
 
-    println("""
-    ========================== PomoJulia ==========================
-                                $(hourNow):$(minutesNow)                
-    1 - Start Timer
-    2 - Set Break
-    3 - Exit
-
-    * Timer at $(getTimer()) $(getTimerName())
-    =======================================================
-    """)
-
     function countdown(pomodoroOption::TimerStruct)
         minutes = pomodoroOption.minutes
         seconds = 0
@@ -62,4 +51,30 @@ minutesNow = minute(now())
         end
     end
 
-    countdown(SHORTBREAK)
+    exit = false
+
+    while !exit
+        println("""
+
+    ========================== PomoJulia ==========================
+                                $(hourNow):$(minutesNow)                
+    1 - Start Timer
+    2 - Set Timer
+    3 - Exit
+
+    * Timer at $(getTimer()) $(getTimerName())
+    ===============================================================""");
+
+    try 
+        opt = parse(Int64, readline())
+        if opt == 1
+        countdown(defaultTimer)
+    elseif opt == 2
+        print(" ")
+    else
+        break
+    end
+    catch ex
+        printstyled(color = :red, "\rSomething went wrong")
+    end
+end
