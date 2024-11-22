@@ -21,6 +21,7 @@ minutesNow = minute(now())
     POMODORO = TimerStruct(25)
 
     defaultTimer = SHORTBREAK
+    defaultMessage = "Time is up!"
 
     function getTimerName()
         timeNameMap = Dict(SHORTBREAK => "Short Break", LONGBREAK => "Long Break")
@@ -49,7 +50,7 @@ minutesNow = minute(now())
                 seconds -= 1
             end
         end
-        alert("Time is up!")
+        alert(defaultMessage)
     end
 
     exit = false
@@ -61,9 +62,11 @@ minutesNow = minute(now())
                                 $(hourNow):$(minutesNow)                
     1 - Start Timer
     2 - Set Timer
-    3 - Exit
+    3 - Set Custom Message
+    4 - Exit
 
-    * Timer at $(getTimer()) $(getTimerName())
+    * Timer at: $(getTimer()) $(getTimerName())
+    * Current Message: $(defaultMessage)
     ===============================================================""");
 
     try 
@@ -92,7 +95,15 @@ minutesNow = minute(now())
         elseif optionTwo == 3
             defaultTimer = POMODORO
         end
+    
+    elseif optionOne == 3
+        printstyled(color = :yellow, "Current Message: ", defaultMessage)
+        print(" Set new message />")
+        global defaultMessage
+        optionMessage = readline()
 
+        defaultMessage = optionMessage
+            
     else
         break
     end
