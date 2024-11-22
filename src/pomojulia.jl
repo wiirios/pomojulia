@@ -49,6 +49,7 @@ minutesNow = minute(now())
                 seconds -= 1
             end
         end
+        alert("Time is up!")
     end
 
     exit = false
