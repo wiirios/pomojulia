@@ -67,11 +67,32 @@ minutesNow = minute(now())
     ===============================================================""");
 
     try 
-        opt = parse(Int64, readline())
-        if opt == 1
+        optionOne = parse(Int64, readline())
+        if optionOne == 1
         countdown(defaultTimer)
-    elseif opt == 2
-        print(" ")
+    elseif optionOne == 2
+        println("""
+
+    ========================== PomoJulia ==========================
+                                $(hourNow):$(minutesNow)                
+    1 - Short Break
+    2 - Long Break
+    3 - Pomodoro
+
+    * Timer at $(getTimer()) $(getTimerName())
+    ===============================================================""");
+
+    optionTwo = parse(Int64, readline())
+        global defaultTimer    
+
+        if optionTwo == 1
+            defaultTimer = SHORTBREAK
+        elseif optionTwo == 2
+            defaultTimer = LONGBREAK
+        elseif optionTwo == 3
+            defaultTimer = POMODORO
+        end
+
     else
         break
     end
