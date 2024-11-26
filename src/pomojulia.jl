@@ -55,59 +55,61 @@ minutesNow = minute(now())
 
     exit = false
 
-    while !exit
-        println("""
-
-    ========================== PomoJulia ==========================
-                                $(hourNow):$(minutesNow)                
-    1 - Start Timer
-    2 - Set Timer
-    3 - Set Custom Message
-    4 - Exit
-
-    * Timer at: $(getTimer()) $(getTimerName())
-    * Current Message: $(defaultMessage)
-    ===============================================================""");
-
-    try 
-        optionOne = parse(Int64, readline())
-        if optionOne == 1
-        countdown(defaultTimer)
-    elseif optionOne == 2
-        println("""
-
-    ========================== PomoJulia ==========================
-                                $(hourNow):$(minutesNow)                
-    1 - Short Break
-    2 - Long Break
-    3 - Pomodoro
-
-    * Timer at $(getTimer()) $(getTimerName())
-    ===============================================================""");
-
-    optionTwo = parse(Int64, readline())
-        global defaultTimer    
-
-        if optionTwo == 1
-            defaultTimer = SHORTBREAK
-        elseif optionTwo == 2
-            defaultTimer = LONGBREAK
-        elseif optionTwo == 3
-            defaultTimer = POMODORO
-        end
+    function start()
+        while !exit
+            println("""
     
-    elseif optionOne == 3
-        println("Current Message: ", "'",defaultMessage,"'")
-        print("Set new message /> ")
-        global defaultMessage
-        optionMessage = readline()
-
-        defaultMessage = optionMessage
-            
-    else
-        break
-    end
-    catch ex
-        println("\rSomething went wrong")
+        ========================== PomoJulia ==========================
+                                    $(hourNow):$(minutesNow)                
+        1 - Start Timer
+        2 - Set Timer
+        3 - Set Custom Message
+        4 - Exit
+    
+        * Timer at: $(getTimer()) $(getTimerName())
+        * Current Message: $(defaultMessage)
+        ===============================================================""");
+    
+        try 
+            optionOne = parse(Int64, readline())
+            if optionOne == 1
+            countdown(defaultTimer)
+        elseif optionOne == 2
+            println("""
+    
+        ========================== PomoJulia ==========================
+                                    $(hourNow):$(minutesNow)                
+        1 - Short Break
+        2 - Long Break
+        3 - Pomodoro
+    
+        * Timer at $(getTimer()) $(getTimerName())
+        ===============================================================""");
+    
+        optionTwo = parse(Int64, readline())
+            global defaultTimer    
+    
+            if optionTwo == 1
+                defaultTimer = SHORTBREAK
+            elseif optionTwo == 2
+                defaultTimer = LONGBREAK
+            elseif optionTwo == 3
+                defaultTimer = POMODORO
+            end
+        
+        elseif optionOne == 3
+            println("Current Message: ", "'",defaultMessage,"'")
+            print("Set new message /> ")
+            global defaultMessage
+            optionMessage = readline()
+    
+            defaultMessage = optionMessage
+                
+        else
+            break
+        end
+        catch ex
+            println("\rSomething went wrong")
+        end
     end
 end
