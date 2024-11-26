@@ -23,6 +23,10 @@ minutesNow = minute(now())
     defaultTimer = SHORTBREAK
     defaultMessage = "Time is up!"
 
+    # shell command
+    command = `"powershell" -Command "cls"`
+    commandActive = false
+
     function getTimerName()
         timeNameMap = Dict(SHORTBREAK => "Short Break", LONGBREAK => "Long Break")
         return get(timeNameMap, defaultTimer, "Pomodoro")
@@ -59,32 +63,37 @@ minutesNow = minute(now())
         while !exit
             println("""
     
-        ========================== PomoJulia ==========================
-                                    $(hourNow):$(minutesNow)                
-        1 - Start Timer
-        2 - Set Timer
-        3 - Set Custom Message
-        4 - Exit
+    ========================== PomoJulia ==========================
+                                 $(hourNow):$(minutesNow)                
+    1 - Start Timer
+    2 - Set Timer
+    3 - Set Custom Message
+    4 - Set Clear Display 
+    5 - Exit
     
-        * Timer at: $(getTimer()) $(getTimerName())
-        * Current Message: $(defaultMessage)
-        ===============================================================""");
+    * Timer at: $(getTimer()) $(getTimerName())
+    * Current Message: $(defaultMessage)
+    * Clear Display Function: $(commandActive)
+    ===============================================================""");
     
         try 
             optionOne = parse(Int64, readline())
             if optionOne == 1
+                if commandActive == true
+                    run(command)
+                end
             countdown(defaultTimer)
         elseif optionOne == 2
             println("""
     
-        ========================== PomoJulia ==========================
-                                    $(hourNow):$(minutesNow)                
-        1 - Short Break
-        2 - Long Break
-        3 - Pomodoro
+    ========================== PomoJulia ==========================
+                                 $(hourNow):$(minutesNow)                
+    1 - Short Break
+    2 - Long Break
+    3 - Pomodoro
     
-        * Timer at $(getTimer()) $(getTimerName())
-        ===============================================================""");
+    * Timer at $(getTimer()) $(getTimerName())
+    ===============================================================""");
     
         optionTwo = parse(Int64, readline())
             global defaultTimer    
@@ -105,6 +114,9 @@ minutesNow = minute(now())
     
             defaultMessage = optionMessage
                 
+        elseif optionOne == 4
+            global commandActive
+            commandActive = !commandActive
         else
             break
         end
