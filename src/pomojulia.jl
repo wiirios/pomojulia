@@ -97,8 +97,8 @@ minutesNow = minute(now())
         end
     
     elseif optionOne == 3
-        printstyled(color = :yellow, "Current Message: ", defaultMessage)
-        print(" Set new message />")
+        println("Current Message: ", "'",defaultMessage,"'")
+        print("Set new message /> ")
         global defaultMessage
         optionMessage = readline()
 
@@ -108,6 +108,6 @@ minutesNow = minute(now())
         break
     end
     catch ex
-        printstyled(color = :red, "\rSomething went wrong")
+        println("\rSomething went wrong")
     end
 end
