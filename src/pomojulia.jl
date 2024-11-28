@@ -37,6 +37,22 @@ minutesNow = minute(now())
         return get(timerMap, defaultTimer, 25)
     end
 
+    """
+    countdown(struct::Int64)
+
+Generates a timer with a specific time data 
+
+# Examples
+
+```julia
+julia>  mutable struct TimerStruct
+            minutes::Int64
+        end
+
+julia> timer = TimerStruct(5) # 5 = 5 Minutes
+julia> countdown(timer)
+```
+"""
     function countdown(pomodoroOption::TimerStruct)
         minutes = pomodoroOption.minutes
         seconds = 0
