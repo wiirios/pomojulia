@@ -1,11 +1,12 @@
 include("../src/pomojulia.jl")
 
-if isempty(ARGS)
-    start()
-elseif ARGS[1] == "-s"
-    countdown(defaultTimer)
-elseif ARGS[1] == "-k"
-    countdown(LONGBREAK)
-elseif ARGS[1] == "-p"
-    countdown(POMODORO)
-end
+# -k 15
+# -p 25
+# -s 5
+
+# dictionary containing times 
+dict = IdDict("-k" => () -> countdown(LONGBREAK), "-p" => () -> countdown(POMODORO), "-s" => () -> countdown(SHORTBREAK))
+
+fun = get(dict, ARGS, () -> countdown(defaultTimer))
+
+isempty(ARGS) ? start() : fun()
