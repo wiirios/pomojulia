@@ -2,6 +2,9 @@
 
 pomojulia is a command-line interface (CLI) program built in Julia, designed to help you apply the <a href="https://pt.wikipedia.org/wiki/T%C3%A9cnica_pomodoro"> Pomodoro Technique </a> effectively.
 
+> [!IMPORTANT]
+> Work in progress...
+
 ## Getting Started
 
 ### Instalation
