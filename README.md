@@ -8,11 +8,10 @@ pomojulia is a command-line interface (CLI) program built in Julia, designed to 
 ## Getting Started
 
 ### Instalation
-```cmd
+```sh
 https://github.com/wiirios/pomojulia.git
 cd pomojulia
 julia -e "using Pkg; Pkg.instantiate()"
-julia main.jl
 ```
 
 ## Hot to use it?
