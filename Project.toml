@@ -4,4 +4,3 @@ authors = ["wiirios <recuperacaowilliamrios@gmail.com>"]
 version = "0.1.0"
 [deps]
 Alert = "28312eec-4d86-447d-83ad-bc2b262de792"
-Term = "22787eb5-b846-44ae-b979-8e399b8463ab"
