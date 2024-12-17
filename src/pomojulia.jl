@@ -5,8 +5,11 @@
 # https://en.wikipedia.org/wiki/Pomodoro_Technique
 # ==============================================
 
+import REPL
+
 using Alert
 using Dates
+using REPL.TerminalMenus
 
 today = Dates.today()
 hourNow = hour(now())
@@ -71,73 +74,59 @@ julia> countdown(timer)
             end
         end
         alert(defaultMessage)
+        run(command)
     end
 
     exit = false
 
     function start()
         while !exit
-            println("""
-    
-    ========================== PomoJulia ==========================
-                                 $(hourNow):$(minutesNow)                
-    1 - Start Timer
-    2 - Set Timer
-    3 - Set Custom Message
-    4 - Set Clear Display 
-    5 - Exit
-    
-    * Timer at: $(getTimer()) $(getTimerName())
-    * Current Message: $(defaultMessage)
-    * Clear Display Function: $(commandActive)
-    ===============================================================""");
-    
-        try 
-            optionOne = parse(Int64, readline())
-            if optionOne == 1
+            options = ["Start Timer", "Set Timer", "Set Custom Message", "Set Clear Display", "Exit"]
+            menu = RadioMenu(options, pagesize=5)
+        
+            optionsTimer = ["Short Break", "Long Break", "Pomodoro"]
+            menuTimer = RadioMenu(optionsTimer, pagesize=3)
+
+            println("========================== PomoJulia ==========================
+                             $(hourNow):$(minutesNow)           ")
+            choice = request("", menu)
+            
+        try
+            if choice == 1
                 if commandActive == true
                     run(command)
                 end
             countdown(defaultTimer)
-        elseif optionOne == 2
-            println("""
-    
-    ========================== PomoJulia ==========================
-                                 $(hourNow):$(minutesNow)                
-    1 - Short Break
-    2 - Long Break
-    3 - Pomodoro
-    
-    * Timer at $(getTimer()) $(getTimerName())
-    ===============================================================""");
-    
-        optionTwo = parse(Int64, readline())
-            global defaultTimer    
-    
-            if optionTwo == 1
-                defaultTimer = SHORTBREAK
-            elseif optionTwo == 2
-                defaultTimer = LONGBREAK
-            elseif optionTwo == 3
-                defaultTimer = POMODORO
-            end
+            
+            elseif choice == 2
+                choiceTimer = request("", menuTimer)
+                global defaultTimer
+
+                if choiceTimer == 1
+                    defaultTimer = SHORTBREAK
+                elseif choiceTimer == 2
+                    defaultTimer = LONGBREAK
+                else
+                    defaultTimer = POMODORO
+                end
+            
+            elseif choice == 3
+                println("Current Message: ", "'",defaultMessage,"'")
+                print("Set new message /> ")
+                global defaultMessage
+                optionMessage = readline()
         
-        elseif optionOne == 3
-            println("Current Message: ", "'",defaultMessage,"'")
-            print("Set new message /> ")
-            global defaultMessage
-            optionMessage = readline()
-    
-            defaultMessage = optionMessage
-                
-        elseif optionOne == 4
-            global commandActive
-            commandActive = !commandActive
-        else
-            break
-        end
+                defaultMessage = optionMessage
+
+            elseif choice == 4
+                global commandActive
+                commandActive = !commandActive
+                println("Set Clear Message: ", commandActive)
+            else
+                break
+            end
         catch ex
-            println("\rSomething went wrong")
+            print("\rSomething went wrong")
         end
     end
 end
