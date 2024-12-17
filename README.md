@@ -30,10 +30,10 @@ If no arguments are provided, the program launches an interactive menu in your t
 ========================== PomoJulia ==========================
                              17:49
 > Start Timer
-> Set Timer
-> Set Custom Message
-> Set Clear Display
-> Exit
+  Set Timer
+  Set Custom Message
+  Set Clear Display
+  Exit
 
 ===============================================================
 ```
