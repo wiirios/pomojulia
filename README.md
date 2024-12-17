@@ -2,9 +2,6 @@
 
 pomojulia is a command-line interface (CLI) program built in Julia, designed to help you apply the <a href="https://pt.wikipedia.org/wiki/T%C3%A9cnica_pomodoro"> Pomodoro Technique </a> effectively.
 
-> [!IMPORTANT]
-> Work in progress...
-
 ## Getting Started
 
 ### Instalation
@@ -32,15 +29,12 @@ If no arguments are provided, the program launches an interactive menu in your t
 ```
 ========================== PomoJulia ==========================
                              17:49
-1 - Start Timer
-2 - Set Timer
-3 - Set Custom Message
-4 - Set Clear Display
-5 - Exit
+> Start Timer
+> Set Timer
+> Set Custom Message
+> Set Clear Display
+> Exit
 
-* Timer at: 5 Short Break
-* Current Message: Time is up!
-* Clear Display Function: false
 ===============================================================
 ```
 
